@@ -66,7 +66,7 @@ RSpec.describe Producer do
 
     context "valid attributes" do
       it "is valid with email, password, company name, website, description, and location " do
-        producer = Producer.create(email:        "company1@gmail.com",
+        producer = Producer.new(email:        "company1@gmail.com",
                                    password:     "password",
                                    company_name: "Company2",
                                    website:      "www.company2.com",
