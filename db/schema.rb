@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023011930) do
+ActiveRecord::Schema.define(version: 20171023024048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,21 @@ ActiveRecord::Schema.define(version: 20171023011930) do
     t.text "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.date "payment_due_date"
+    t.string "payment_status"
+    t.float "price"
+    t.string "order_status"
+    t.date "due_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "application_id"
+    t.bigint "order_id"
+    t.string "tracking_number"
+    t.index ["application_id"], name: "index_invoices_on_application_id"
+    t.index ["order_id"], name: "index_invoices_on_order_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -78,6 +93,8 @@ ActiveRecord::Schema.define(version: 20171023011930) do
 
   add_foreign_key "applications", "orders"
   add_foreign_key "applications", "producers"
+  add_foreign_key "invoices", "applications"
+  add_foreign_key "invoices", "orders"
   add_foreign_key "items", "orders"
   add_foreign_key "orders", "categories"
   add_foreign_key "orders", "designers"

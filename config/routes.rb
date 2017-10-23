@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :designers do
+    resources :invoices, only: [:index, :show, :edit, :update]
     resources :orders do
       resources :applications, only: [:index, :show]
       resources :items, only: [:index, :create, :new, :destroy]
@@ -14,7 +15,9 @@ Rails.application.routes.draw do
   end
 
   resources :producers do
+    resources :invoices, only: [:index, :show, :edit, :update]    
     resources :applications, except: [:edit, :update]
   end
 
+  resources :invoices
 end
