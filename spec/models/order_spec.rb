@@ -12,6 +12,7 @@ RSpec.describe Order do
                                 location:     "San Fransisco")
         category = Category.create!(title: "Fashuuuun")
         order = designer.orders.new(specs: "Hi",
+                                    status: "incomplete",        
                                     category: category)
         
         expect(order).to be_invalid
@@ -26,6 +27,7 @@ RSpec.describe Order do
                                 location:     "San Fransisco")
         category = Category.create!(title: "Fashuuuun")                                
         order = designer.orders.new(max_due_date: "10-10-2016",
+                                    status: "incomplete",
                                     category: category)
         
         expect(order).to be_invalid
@@ -40,6 +42,7 @@ RSpec.describe Order do
                                 location:     "San Fransisco")
         category = Category.create!(title: "Fashuuuun")                                
         order = designer.orders.new(max_due_date: "10-10-2016",
+                                    status: "incomplete",
                                     specs: "Hello friennn")
         
         expect(order).to be_invalid
@@ -58,6 +61,7 @@ RSpec.describe Order do
         category = Category.create!(title: "Fashuuuun")
         order = designer.orders.new(max_due_date: "10-10-2016",
                                     specs: "Hi",
+                                    status: "incomplete",
                                     category: category)
 
         expect(order).to be_valid
@@ -76,6 +80,7 @@ RSpec.describe Order do
       category = Category.create!(title: "Fashuuuun")
       order = designer.orders.new(max_due_date: "10-10-2016",
                                   specs: "Hi",
+                                  status: "incomplete",                                  
                                   category: category)
 
       expect(order).to respond_to(:items)
@@ -91,6 +96,7 @@ RSpec.describe Order do
       category = Category.create!(title: "Fashuuuun")
       order = designer.orders.new(max_due_date: "10-10-2016",
                                   specs: "Hi",
+                                  status: "incomplete",                                  
                                   category: category)
 
       expect(order).to respond_to(:category)
@@ -106,6 +112,7 @@ RSpec.describe Order do
       category = Category.create!(title: "Fashuuuun")
       order = designer.orders.new(max_due_date: "10-10-2016",
                                   specs: "Hi",
+                                  status: "incomplete",                                  
                                   category: category)
 
       expect(order).to respond_to(:designer)

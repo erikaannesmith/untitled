@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :invoices, only: [:index, :show, :edit, :update]    
     resources :applications, except: [:edit, :update]
   end
-
+  
   #orders become legitimate when submitted, but must be approved by admin
   #applications become legitimate when submitted, only approved by designer, default status = pending 
   resources :invoices
