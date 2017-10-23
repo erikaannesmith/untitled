@@ -9,7 +9,7 @@ RSpec.describe Item do
                                 company_name: "Company1",
                                 website:      "www.company1.com",
                                 description:  "Company1shtuff like makindaclothes",
-                                location:     "San Fransisco")
+                                location:     "Shan Franshishco")
         order = designer.orders.new(max_due_date: "10-10-2016",
                                     specs: "Hi")
         item = order.items.new(quantity: 2)
