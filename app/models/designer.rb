@@ -1,4 +1,5 @@
 class Designer < ApplicationRecord
-  validates :email, :password, :company_name, :website, :description, :location, presence: true, uniqueness: true
+  validates :email, :password, :company_name, :website, :description, :location, presence: true
+  validates_uniqueness_of :email, :company_name, :website
   has_many :orders
 end
