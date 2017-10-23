@@ -86,9 +86,11 @@ RSpec.describe Application do
                                     location:     "San Fransisco")
         category = Category.create!(title: "Fashuuuun")
         order = designer.orders.new(specs: "Hi",
+                                    status: "incomplete",
                                     category: category)
         app = producer.applications.new(price_offer: 100,
                                         specs: "hello",
+                                        status: "incomplete",
                                         order: order)
 
         expect(app).to be_valid

@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023011930) do
+ActiveRecord::Schema.define(version: 20171023190825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "administrators", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "applications", force: :cascade do |t|
     t.integer "price_offer"
@@ -23,6 +30,7 @@ ActiveRecord::Schema.define(version: 20171023011930) do
     t.datetime "updated_at", null: false
     t.bigint "producer_id"
     t.bigint "order_id"
+    t.string "status"
     t.index ["order_id"], name: "index_applications_on_order_id"
     t.index ["producer_id"], name: "index_applications_on_producer_id"
   end
@@ -35,13 +43,30 @@ ActiveRecord::Schema.define(version: 20171023011930) do
 
   create_table "designers", force: :cascade do |t|
     t.text "email"
-    t.text "password"
     t.text "company_name"
     t.text "website"
     t.text "description"
     t.text "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.date "payment_due_date"
+    t.string "payment_status"
+    t.float "price"
+    t.string "order_status"
+    t.date "due_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "application_id"
+    t.bigint "order_id"
+    t.string "tracking_number"
+    t.integer "designer_rating"
+    t.integer "producer_rating"
+    t.index ["application_id"], name: "index_invoices_on_application_id"
+    t.index ["order_id"], name: "index_invoices_on_order_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -61,23 +86,26 @@ ActiveRecord::Schema.define(version: 20171023011930) do
     t.bigint "designer_id"
     t.bigint "category_id"
     t.integer "base_price"
+    t.string "status"
     t.index ["category_id"], name: "index_orders_on_category_id"
     t.index ["designer_id"], name: "index_orders_on_designer_id"
   end
 
   create_table "producers", force: :cascade do |t|
     t.text "email"
-    t.text "password"
     t.text "company_name"
     t.text "website"
     t.text "description"
     t.text "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "applications", "orders"
   add_foreign_key "applications", "producers"
+  add_foreign_key "invoices", "applications"
+  add_foreign_key "invoices", "orders"
   add_foreign_key "items", "orders"
   add_foreign_key "orders", "categories"
   add_foreign_key "orders", "designers"
