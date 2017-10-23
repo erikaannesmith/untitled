@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023030601) do
+ActiveRecord::Schema.define(version: 20171023190825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "administrators", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "applications", force: :cascade do |t|
     t.integer "price_offer"
@@ -36,13 +43,13 @@ ActiveRecord::Schema.define(version: 20171023030601) do
 
   create_table "designers", force: :cascade do |t|
     t.text "email"
-    t.text "password"
     t.text "company_name"
     t.text "website"
     t.text "description"
     t.text "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -86,13 +93,13 @@ ActiveRecord::Schema.define(version: 20171023030601) do
 
   create_table "producers", force: :cascade do |t|
     t.text "email"
-    t.text "password"
     t.text "company_name"
     t.text "website"
     t.text "description"
     t.text "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "applications", "orders"
